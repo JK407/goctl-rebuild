@@ -1,1 +1,5 @@
 # idea
+./.idea
+
+# 生成的可执行文件
+gen.exe
