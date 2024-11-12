@@ -13,9 +13,9 @@ type (
 )
 
 // TODO: add response members here and delete this comment
-type response {
+type (
 
-}
+)
 
 service {{.serviceName}} {
 	@handler GetUser // TODO: set handler name and delete this comment
