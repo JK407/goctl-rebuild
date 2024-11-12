@@ -2,7 +2,7 @@ package gogen
 
 import (
 	"fmt"
-	"gogen/version"
+	"gogen/internal/version"
 	"os"
 	"path"
 	"sort"

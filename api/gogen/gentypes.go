@@ -3,7 +3,7 @@ package gogen
 import (
 	_ "embed"
 	"fmt"
-	"gogen/version"
+	"gogen/internal/version"
 	"io"
 	"os"
 	"path"

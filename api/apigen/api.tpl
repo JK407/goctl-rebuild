@@ -3,19 +3,21 @@ syntax = "v1"
 info (
 	title: // TODO: add title
 	desc: // TODO: add description
-	author: "oberlhu"
-	email: "oberlhu@tencent.com"
+	author: "{{.gitUser}}"
+	email: "{{.gitEmail}}"
 )
 
-type request {
-	// TODO: add members here and delete this comment
-}
+// TODO: add request members here and delete this comment
+type (
 
+)
+
+// TODO: add response members here and delete this comment
 type response {
-	// TODO: add members here and delete this comment
+
 }
 
-service demo-api {
+service {{.serviceName}} {
 	@handler GetUser // TODO: set handler name and delete this comment
 	get /users/id/:userId(request) returns(response)
 

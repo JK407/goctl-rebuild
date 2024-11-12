@@ -1,15 +1,16 @@
-package apigen
+package api
 
 import (
 	"github.com/zeromicro/go-zero/tools/goctl/api/apigen"
 	"github.com/zeromicro/go-zero/tools/goctl/config"
-	"gogen/cobrax"
-	"gogen/gogen"
+	apigen2 "gogen/api/apigen"
+	"gogen/api/gogen"
+	"gogen/internal/cobrax"
 )
 
 var (
 	// Cmd describes an api command.
-	Cmd   = cobrax.NewCommand("api", cobrax.WithRunE(apigen.CreateApiTemplate))
+	Cmd   = cobrax.NewCommand("api", cobrax.WithRunE(apigen2.CreateApiTemplate))
 	goCmd = cobrax.NewCommand("go", cobrax.WithRunE(gogen.GoCommand))
 )
 

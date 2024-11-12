@@ -3,9 +3,9 @@ package cmd
 import (
 	_ "embed"
 	"fmt"
-	"gogen/apigen"
-	"gogen/cobrax"
-	"gogen/version"
+	"gogen/api"
+	"gogen/internal/cobrax"
+	"gogen/internal/version"
 	"os"
 	"runtime"
 	"strings"
@@ -26,7 +26,7 @@ const (
 var (
 	//go:embed usage.tpl
 	usageTpl string
-	rootCmd  = cobrax.NewCommand("goctl")
+	rootCmd  = cobrax.NewCommand("gen")
 )
 
 // Execute executes the given command
@@ -101,7 +101,7 @@ func init() {
 		runtime.GOOS, runtime.GOARCH)
 
 	rootCmd.SetUsageTemplate(usageTpl)
-	rootCmd.AddCommand(apigen.Cmd)
+	rootCmd.AddCommand(api.Cmd)
 	rootCmd.Command.AddCommand(cobracompletefig.CreateCompletionSpecCommand())
 	rootCmd.MustInit()
 }
