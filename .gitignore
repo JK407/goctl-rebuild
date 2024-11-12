@@ -2,4 +2,6 @@
 ./.idea
 
 # 生成的可执行文件
-gen.exe
+demo/gen.exe
+
+./demo

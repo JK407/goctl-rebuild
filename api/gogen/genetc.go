@@ -27,6 +27,7 @@ func genEtc(dir string, cfg *config.Config, api *spec.ApiSpec) error {
 	service := api.Service
 	host := "0.0.0.0"
 	port := strconv.Itoa(defaultPort)
+	desc := "测试"
 
 	return genFile(fileGenConfig{
 		dir:             dir,
@@ -40,6 +41,7 @@ func genEtc(dir string, cfg *config.Config, api *spec.ApiSpec) error {
 			"serviceName": service.Name,
 			"host":        host,
 			"port":        port,
+			"desc":        desc,
 		},
 	})
 }
