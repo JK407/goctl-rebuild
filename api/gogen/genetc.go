@@ -73,11 +73,11 @@ type LogCfg struct {
 
 // etc配置文件
 type Config struct {
-	ServiceName string     `json:"service_name"`
-	Host        string     `json:"host"`
-	Port        int64      `json:"port"`
-	Mysql       []MysqlCfg `json:"mysql"`
-	Log         LogCfg     `json:"log"`
+	ServiceName string   `json:"service_name"`
+	Host        string   `json:"host"`
+	Port        int64    `json:"port"`
+	Mysql       MysqlCfg `json:"mysql"`
+	Log         LogCfg   `json:"log"`
 }
 
 // MysqlCfg的构造函数
@@ -95,10 +95,7 @@ func (c *Config) init(api *spec.ApiSpec) {
 	c.ServiceName = service.Name
 	c.Host = defaultHost
 	c.Port = defaultPort
-	c.Mysql = []MysqlCfg{
-		{}, // 创建一个空的MysqlCfg实例
-	}
-	c.Mysql[0].initMysqlCfg(defaultMysqlTableName, defaultMysqlUser, defaultMysqlPassword, defaultMysqlAddr, defaultMysqlPort)
+	c.Mysql.initMysqlCfg(defaultMysqlTableName, defaultMysqlUser, defaultMysqlPassword, defaultMysqlAddr, defaultMysqlPort)
 
 	c.Log = LogCfg{
 		ServiceName:         service.Name,

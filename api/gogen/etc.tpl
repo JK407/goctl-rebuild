@@ -2,13 +2,11 @@ Name: {{.ServiceName}}
 Host: {{.Host}}
 Port: {{.Port}}
 Mysql:
-{{- range .Mysql }}
-    - {{ .TableName }}:
-        User: {{ .User }}
-        Password: {{ .Password }}
-        Addr: {{ .Addr }}
-        Port: {{ .Port }}
-{{- end }}
+    - {{ .Mysql.TableName }}:
+        User: {{ .Mysql.User }}
+        Password: {{ .Mysql.Password }}
+        Addr: {{ .Mysql.Addr }}
+        Port: {{ .Mysql.Port }}
 Log:
     # 服务名称
     ServiceName: {{.Log.ServiceName}}
