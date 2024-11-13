@@ -24,6 +24,14 @@ const (
 		PrevSecret string
 	}
 `
+	mysqlTemplate = `Mysql struct {
+		TableName string
+		User      string
+		Password  string
+		Addr      string
+		Port      int64
+	}
+`
 )
 
 //go:embed config.tpl
@@ -58,6 +66,7 @@ func genConfig(dir string, cfg *config.Config, api *spec.ApiSpec) error {
 		builtinTemplate: configTemplate,
 		data: map[string]string{
 			"authImport": authImportStr,
+			"mysql":      mysqlTemplate,
 			"auth":       strings.Join(auths, "\n"),
 			"jwtTrans":   strings.Join(jwtTransList, "\n"),
 		},
