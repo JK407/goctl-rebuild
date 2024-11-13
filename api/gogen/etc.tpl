@@ -3,10 +3,11 @@ Host: {{.Host}}
 Port: {{.Port}}
 Mysql:
 {{- range .Mysql }}
-    - TableName: {{ .TableName }}
-      User: {{ .User }}
-      Password: {{ .Password }}
-      Addr: {{ .Addr }}
+    - {{ .TableName }}:
+        User: {{ .User }}
+        Password: {{ .Password }}
+        Addr: {{ .Addr }}
+        Port: {{ .Port }}
 {{- end }}
 Log:
     # 服务名称

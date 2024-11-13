@@ -9,6 +9,12 @@ import (
 )
 
 const (
+	defaultMysqlTableName = "test"
+	defaultMysqlUser      = "root"
+	defaultMysqlPassword  = "password"
+	defaultMysqlAddr      = "127.0.0.1"
+	defaultMysqlPort      = 3306
+
 	defaultPort = 8888
 	defaultHost = "0.0.0.0"
 	etcDir      = "etc"
@@ -46,6 +52,7 @@ type MysqlCfg struct {
 	User      string `json:"user"`
 	Password  string `json:"password"`
 	Addr      string `json:"addr"`
+	Port      int64  `json:"port"`
 }
 
 // 日志配置
@@ -73,26 +80,26 @@ type Config struct {
 	Log         LogCfg     `json:"log"`
 }
 
+// MysqlCfg的构造函数
+func (m *MysqlCfg) initMysqlCfg(tableName, user, password, addr string, port int64) {
+	m.TableName = tableName
+	m.User = user
+	m.Password = password
+	m.Addr = addr
+	m.Port = port
+}
+
 // 初始化
-func (c Config) init(api *spec.ApiSpec) Config {
+func (c *Config) init(api *spec.ApiSpec) {
 	service := api.Service
 	c.ServiceName = service.Name
 	c.Host = defaultHost
 	c.Port = defaultPort
 	c.Mysql = []MysqlCfg{
-		{
-			TableName: "",
-			User:      "root",
-			Password:  "root",
-			Addr:      "127.0.0.1",
-		},
-		{
-			TableName: "",
-			User:      "root",
-			Password:  "password",
-			Addr:      "0.0.0.1",
-		},
+		{}, // 创建一个空的MysqlCfg实例
 	}
+	c.Mysql[0].initMysqlCfg(defaultMysqlTableName, defaultMysqlUser, defaultMysqlPassword, defaultMysqlAddr, defaultMysqlPort)
+
 	c.Log = LogCfg{
 		ServiceName:         service.Name,
 		Mode:                LOG_MODE_CONSOLE,
@@ -107,7 +114,6 @@ func (c Config) init(api *spec.ApiSpec) Config {
 		MaxSize:             defaultLogMaxSiz,
 		Rotation:            LOG_ROTATION_DAILY,
 	}
-	return c
 }
 
 func genEtc(dir string, cfg *config.Config, api *spec.ApiSpec) error {
@@ -118,7 +124,7 @@ func genEtc(dir string, cfg *config.Config, api *spec.ApiSpec) error {
 	}
 
 	configData := Config{}
-	configData = configData.init(api)
+	configData.init(api)
 
 	return genFile(fileGenConfig{
 		dir:             dir,
